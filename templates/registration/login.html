@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}KIN 214 | Connexion{% endblock %}
+{% block menu %}{% endblock %}
+{% block content %}
+
+<div class="ui middle aligned center aligned grid">
+	<div class="column">
+    <form class="ui large form" method="POST">
+		{% csrf_token %}
+      	<div class="ui stacked segment">
+        	<div class="field">
+          		<div class="ui left icon input">
+            		<i class="user icon"></i>
+					{{ form.username }}
+          		</div>
+        	</div>
+        	<div class="field">
+          		<div class="ui left icon input">
+            		<i class="lock icon"></i>
+            		{{ form.password }}
+          		</div>
+        	</div>
+			<button class = "ui fluid large blue submit button" type = "submit" value = "Submit">Connexion</button>
+      	</div>
+    </form>
+		<div class = "ui message">
+		Mot de passe oublié ? <a href="{% url "password_reset" %}">Clique ici !</a>
+		</div>
+		<div class="ui message">
+			Nouveau parmi nous ? <a href="{% url "inscription" %}">Inscription</a>
+		</div>
+  	</div>
+</div>
+{% endblock %}
