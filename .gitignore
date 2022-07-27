@@ -131,4 +131,5 @@ dmypy.json
 
 #migrations
 */migrations/*
+!*/migrations/__init__.py
 pg_data/*
