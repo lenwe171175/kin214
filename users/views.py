@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from kin214.settings import LOGIN_URL
-from .forms import InscriptionForm
+from .forms import InscriptionForm, MonProfilForm
+from .models import Utilisateur
 
 # Create your views here.
 
@@ -36,3 +37,24 @@ def inscription(request):
     else:
         form = InscriptionForm()
     return render(request, "users/inscription.html", {"form": form})
+
+@login_required
+def monprofil(request):
+    user = Utilisateur.objects.get(pk=request.user.pk)
+    if request.method == "POST":
+        form = MonProfilForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Modification(s) réussie(s)")
+            return redirect(monprofil)
+        else:
+            messages.error(request, "Une erreur est survenue lors de la modification")
+            return redirect(monprofil)
+    else:
+        form = MonProfilForm(instance=user)
+    return render(request, "users/monprofil.html", {"form": form})
+
+@login_required
+def annuaire(request):
+    utilisateur_liste=Utilisateur.objects.filter(is_active=True)
+    return render(request, "users/annuaire.html", { "list" : utilisateur_liste})

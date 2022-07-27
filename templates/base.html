@@ -56,82 +56,40 @@
 			min-height: 100%;
 			background-size: cover;
 		}
-	  	.column {
-	    	max-width: 450px;
-	  	}
-	</style>
 
-	<style type="text/css">
+		.ui.menu .item img.logo {
+		margin-right: 1.5em;
+		}
+
+		.main.container {
+		margin-top: 7em;
+		}
+
+		.wireframe {
+		margin-top: 2em;
+		}
+
 		body > .grid {
 		height: 100%;
 		}
 	</style>
 
-	<style type="text/css">
-		.ui.menu .item img.logo {
-		margin-right: 1.5em;
-		}
-		.main.container {
-		margin-top: 7em;
-		}
-		.wireframe {
-		margin-top: 2em;
-		}
-	</style>
-  
-
+<style type="text/css">
+	
+</style>
 </head>
 
 <body>
 {% block menu %}
-	<div class="ui fixed inverted menu">
-		<div class="ui container">
-			<a href="#" class="header item">
-				<img class="logo" src="{% static "images/logocarre.png" %}">
-				KIN 214
-		  	</a>
-		  	<div class="ui simple right dropdown item">
-				Bienvenue {{ user.first_name }} <i class="dropdown icon"></i>
-				<div class="menu">
-			  		<a class="item" href="#">Mon profil</a>
-			  		<a class="item" href="#">Mes préférences</a>
-			  		<div class="divider"></div>
-			  		<a class="item" href="{% url "logout" %}">Déconnexion</a>
-				</div>
-		  	</div>
-		</div>
-	  </div>
+{% include "navbar.html" %}
 {% endblock %}
-
-{% if messages %}
-<div class="ui basic segment">
-	<div class="ui container">
-	{% for msg in messages %}
-	<div class = "ui floating message {% if msg.tags %} {{ msg.tags }} {% endif %}">
-		<i class = "close icon"></i>
-		{{ msg }}
-	</div>
-	{% endfor %}
-	</div>
-</div>	
-{% endif %}
-
-{% if form.non_field_errors %}
-<div class="ui basic segment">
-	<div class="ui container">
-	{% for error in form.non_field_errors %}
-	<div class = "ui floating message error">
-		<i class = "close icon"></i>
-		{{ error }}
-	</div>
-	{% endfor %}
-	</div>
-</div>	
-{% endif %}
-
-{% block content %}
+{% block allcontent %}
+<div class="ui main container">
+	{% include "messages.html" %}
+	{% block content %}
+	{% endblock %}
+</div>
 {% endblock %}
-
 </body>
 
 <footer>

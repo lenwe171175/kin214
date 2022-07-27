@@ -1,0 +1,27 @@
+{% load static %}
+
+{% if messages %}
+	<div class="ui basic segment">
+		<div class="ui container">
+		{% for msg in messages %}
+		<div class = "ui floating message {% if msg.tags %} {{ msg.tags }} {% endif %}">
+			<i class = "close icon"></i>
+			{{ msg }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>	
+{% endif %}
+
+{% if form.non_field_errors %}
+	<div class="ui basic segment">
+		<div class="ui container">
+		{% for error in form.non_field_errors %}
+		<div class = "ui floating message error">
+			<i class = "close icon"></i>
+			{{ error }}
+		</div>
+		{% endfor %}
+		</div>
+	</div>	
+{% endif %}

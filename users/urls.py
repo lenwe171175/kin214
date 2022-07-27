@@ -12,6 +12,8 @@ urlpatterns = [
     path("password_reset_confirm/(<uidb64>[0-9A-Za-z_\-]+)/(<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/",auth_views.PasswordResetConfirmView.as_view(),name="password_reset_confirm",),
     path("password_reset_complete/",auth_views.PasswordResetCompleteView.as_view(),name="password_reset_complete",),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("index/", views.index, name="index"),
+    path("", views.index, name="index"),
     path("inscription/", views.inscription, name="inscription"),
+    path("monprofil", views.monprofil, name="monprofil"),
+    path("annuaire", views.annuaire, name="annuaire"),
 ]

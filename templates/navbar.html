@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="ui inverted menu">
+    <div class="ui container">
+        <a href="{% url "index" %}" class="header item">
+            <img class="logo" src="{% static "images/logocarre.png" %}">
+            KIN 214
+          </a>
+          <div class="ui simple right dropdown item">
+            Bienvenue {{ user.first_name }} <i class="dropdown icon"></i>
+            <div class="menu">
+                  <a class="item" href="{% url "monprofil" %}">Mon profil</a>
+                  <a class="item" href="#">Mes préférences</a>
+                  <div class="divider"></div>
+                  <a class="item" href="{% url "logout" %}">Déconnexion</a>
+            </div>
+          </div>
+    </div>
+</div>

@@ -2,10 +2,10 @@
 {% load static %}
 {% block title %}KIN 214 | Connexion{% endblock %}
 {% block menu %}{% endblock %}
-{% block content %}
+{% block allcontent %}
 
-<div class="ui middle aligned center aligned grid">
-	<div class="column">
+<div class="ui container middle aligned center aligned grid">
+	<div class="six wide column">
     <form class="ui large form" method="POST">
 		{% csrf_token %}
       	<div class="ui stacked segment">
@@ -32,4 +32,5 @@
 		</div>
   	</div>
 </div>
+
 {% endblock %}

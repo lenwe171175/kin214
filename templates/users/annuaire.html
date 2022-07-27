@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}KIN 214 | Annuaire{% endblock %}
+{% block content %}
+	<div class="ui stacked segment">
+		{% if list %}
+		<table class = "ui celled padded table">
+			<thead>
+			<tr>
+				<th class = "center aligned single line">Nom/Prénom</th>
+				<th class = "center aligned single line">Email</th>
+                <th class = "center aligned single line">Téléphone</th>
+                <th class = "center aligned single line">Entreprise</th>
+                <th class = "center aligned single line">Poste</th>
+			<tr>
+			</thead>
+			{% for people in list %}
+				<tr>
+					<td class = "center aligned single line">{{ people.last_name }} {{ people.first_name }}</td>
+					<td class = "center aligned single line">{{ people.email }}</td>
+					<td class = "center aligned single line">{{ people.phone }}</td>
+                    <td class = "center aligned single line">{{ people.entreprise }}</td>
+                    <td class = "center aligned single line">{{ people.poste }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+        {% else %}
+        Personne n'est encore enregistré :(
+        {% endif %}
+{% endblock %}

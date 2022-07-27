@@ -57,7 +57,6 @@ class InscriptionForm(forms.ModelForm):
         if domain not in domain_list:
             raise forms.ValidationError("Seules les adresses mail Gadz.org sont autorisées")
         return data
-
     
     def __init__(self, *args, **kwargs):
         super(InscriptionForm, self).__init__(*args, **kwargs)
@@ -66,3 +65,12 @@ class InscriptionForm(forms.ModelForm):
         self.fields["last_name"].required = True
         self.fields["phone"].required = True
         self.fields["email"].required = True
+
+class MonProfilForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MonProfilForm, self).__init__(*args, **kwargs)
+        self.fields["phone"].required = True
+
+    class Meta:
+        model = Utilisateur
+        fields = ["phone","bucque","fams","entreprise","poste"]
