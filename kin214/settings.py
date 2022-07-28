@@ -146,5 +146,6 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = getenv("DEFAULT_FROM_EMAIL", "")
 SERVER_EMAIL = getenv("SERVER_EMAIL", "")
 
-CSRF_TRUSTED_ORIGINS = ["https://kin214.herokuapp.com/"]
+URL_CSRF = getenv("URL_CSRF", "")
+CSRF_TRUSTED_ORIGINS = [URL_CSRF]
 django_heroku.settings(locals())
