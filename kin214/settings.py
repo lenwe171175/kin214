@@ -15,6 +15,7 @@ import os
 from os import environ, getenv
 from pathlib import Path
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv(".env")
 
@@ -144,3 +145,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = getenv("DEFAULT_FROM_EMAIL", "")
 SERVER_EMAIL = getenv("SERVER_EMAIL", "")
+
+django_heroku.settings(locals())
