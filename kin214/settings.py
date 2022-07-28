@@ -31,7 +31,6 @@ SECRET_KEY = environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("DEBUG", "False") == "True"
-PROD = getenv("PROD", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
