@@ -4,11 +4,11 @@
 {% block menu %}{% endblock %}
 {% block allcontent %}
 {% include "../messages.html" %}
-<div class="ui container middle aligned center aligned grid">
-	<div class="six wide column">
+<div class="ui container stackable middle aligned center aligned grid">
+	<div class="eight wide column">
     <form class="ui large fluid form" action ="{% url "inscription" %}" method="POST">
 		{% csrf_token %}
-      	<div class="ui stacked segment">
+      	<div class="ui segment">
 			<div class="ui blue header">Inscription</div>
 			{% for field in form %}
 	        	{% if field.errors %}

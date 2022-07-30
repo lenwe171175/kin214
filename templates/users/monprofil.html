@@ -3,11 +3,11 @@
 {% block title %}KIN 214 | Mon profil{% endblock %}
 {% block content %}
 
-<div class="ui middle aligned center aligned grid">
+<div class="ui middle stackable aligned center aligned grid">
 	<div class="eight wide column">
     <form class="ui large fluid form" action ="{% url "monprofil" %}" method="POST">
 		{% csrf_token %}
-      	<div class="ui stacked segment">
+      	<div class="ui segment">
 			<div class="ui blue header">Mon profil</div>
 			{% for field in form %}
 	        	{% if field.errors %}
