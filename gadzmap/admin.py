@@ -31,4 +31,4 @@ class SpatialDBModelAdmin(admin.OSMGeoAdmin):
 
 @admin.register(Position)
 class PositionAdmin(SpatialDBModelAdmin):
-    list_display = ("description", "location")
+    list_display = ("userid","description", "location")

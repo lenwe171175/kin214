@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}KIN 214 | Où suis-je ?{% endblock %}
+{% block content %}
+{{ form.media }}
+<div class="ui middle aligned center aligned grid">
+	<div class="eight wide column">
+    <form class="ui large fluid form" action ="{% url "malocalisation" %}" method="POST">
+		{% csrf_token %}
+      	<div class="ui stacked segment">
+			<div class="ui blue header">Où suis-je ?</div>
+			{% for field in form %}
+	        	{% if field.errors %}
+				<div class = "error field">
+				{% else %}
+						<div class = "field">
+				{% endif %}
+				{{ field }}
+				{% if field.errors %}
+					<div class = "ui pointing red basic label">
+						{% for error in field.errors %}
+							{{ error|title }}
+						{% endfor %}
+					</div>
+				{% endif %}
+        		</div>
+			{% endfor %}
+        	<button class = "ui fluid large blue submit button" type = "submit" value = "Submit">Soumettre</button>
+      	</div>
+    </form>
+  	</div>
+</div>
+
+{% endblock %}
