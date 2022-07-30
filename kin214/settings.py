@@ -16,6 +16,8 @@ from os import environ, getenv
 from pathlib import Path
 from dotenv import load_dotenv
 import django_heroku
+from glob import glob
+import dj_database_url
 
 load_dotenv(".env")
 
@@ -46,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'captcha',
+    'django.contrib.gis',
+    'gadzmap',
 ]
 
 MIDDLEWARE = [
@@ -87,9 +91,12 @@ WSGI_APPLICATION = 'kin214.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    "default": __import__("db").DB_SETTINGS,
+    "default":{},
+    "users": __import__("db").DB_SETTINGS,
+    "gadzmap": __import__("db").SPATIAL_SETTINGS,
 }
 
+DATABASE_ROUTERS = ["kin214.dbrouter.DBRouter"]
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -144,4 +151,6 @@ SERVER_EMAIL = getenv("SERVER_EMAIL", "")
 
 URL_CSRF = getenv("URL_CSRF", "")
 CSRF_TRUSTED_ORIGINS = [URL_CSRF]
+GDAL_LIBRARY_PATH=glob('/usr/lib/libgdal.so.*')[0]
+GEOS_LIBRARY_PATH=glob('/usr/lib/libgeos_c.so.*')[0]
 django_heroku.settings(locals())

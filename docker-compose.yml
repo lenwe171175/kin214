@@ -1,0 +1,75 @@
+services:
+  kin214:
+    container_name: "kin214"
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3005:8000"
+    networks:
+      - external
+      - kin-internal
+    env_file:
+      - .env
+    links:
+      - postgis
+      - postgres
+    depends_on:
+      postgis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  postgis:
+    container_name: "postgis-spatial-db"
+    image: kartoza/postgis:14-3.2
+    volumes:
+      - ./db_data/postgis-data/:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=${SPATIAL_DB_NAME}
+      - POSTGRES_USER=${SPATIAL_USERNAME}
+      - POSTGRES_PASS=${SPATIAL_PASSWORD}
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
+    ports:
+      - "25432:5432"
+    networks:
+      - kin-internal
+    hostname: ${SPATIAL_ADDR}
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      start_period: 5s
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  postgres:
+    container_name: "postgres-db"
+    image: bitnami/postgresql:14
+    restart: unless-stopped
+    networks:
+      - kin-internal
+    environment:
+      - POSTGRESQL_USERNAME=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRESQL_DATABASE=${DB_NAME}
+      - POSTGRESQL_POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db_data/postgres-data/:/bitnami/postgresql
+    expose:
+      - 5432
+    hostname: ${DB_ADDR}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      start_period: 5s
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+networks:
+  external:
+    driver: bridge
+  kin-internal:
+    driver: bridge
+    internal: true
+

@@ -1,0 +1,12 @@
+.github
+Dockerfile
+docker-compose.yml
+Procfile
+venv
+.venv
+*.env
+.gitignore
+*.md
+*.sqlite3
+*/migrations/*
+!*/migrations/__init__.py

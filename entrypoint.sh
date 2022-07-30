@@ -1,7 +1,7 @@
 echo "Making migrations"
 python manage.py makemigrations || exit 1
 
-echo "Running migrations"
+echo "Running migrations for default database"
 python manage.py migrate || exit 2
 
 echo "Inserting base data if necessary"

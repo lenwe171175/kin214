@@ -18,3 +18,11 @@ DB_SETTINGS = {
     "PASSWORD": getenv("DB_PASSWORD", ""),
     "HOST": getenv("DB_ADDR", ""),
 }
+
+SPATIAL_SETTINGS = {
+    "ENGINE": "django.contrib.gis.db.backends.postgis",
+    "NAME": getenv("SPATIAL_DB_NAME", ""),
+    "HOST": getenv("SPATIAL_ADDR", ""),
+    "USER": getenv("SPATIAL_USERNAME", ""),
+    "PASSWORD": getenv("SPATIAL_PASSWORD", ""),
+}
