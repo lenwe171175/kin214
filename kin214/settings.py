@@ -36,6 +36,7 @@ DEBUG = getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["*"]
 
+HEROKU = getenv("HEROKU", "False") == "True"
 
 # Application definition
 
@@ -135,7 +136,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-if os.environ.get('ENV') == 'HEROKU':
+if HEROKU:
     STATIC_ROOT = BASE_DIR / "static"
 else: 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
@@ -162,7 +163,7 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 5,
 }
 
-if os.environ.get('ENV') == 'HEROKU':
+if HEROKU:
     GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so'
     GEOS_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgeos_c.so'
 else:
