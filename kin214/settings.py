@@ -152,8 +152,6 @@ SERVER_EMAIL = getenv("SERVER_EMAIL", "")
 
 URL_CSRF = getenv("URL_CSRF", "")
 CSRF_TRUSTED_ORIGINS = [URL_CSRF]
-GDAL_LIBRARY_PATH=glob('/usr/lib/libgdal.so.*')[0]
-GEOS_LIBRARY_PATH=glob('/usr/lib/libgeos_c.so.*')[0]
 
 LEAFLET_CONFIG = { 
     'DEFAULT_CENTER': (46.377 ,2.307), # Latitude ,  Longitude 
@@ -161,3 +159,6 @@ LEAFLET_CONFIG = {
 }
 
 django_heroku.settings(locals())
+
+GDAL_LIBRARY_PATH=glob('/usr/lib/libgdal.so.*')[0]
+GEOS_LIBRARY_PATH=glob('/usr/lib/libgeos_c.so.*')[0]
