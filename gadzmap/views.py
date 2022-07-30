@@ -33,7 +33,7 @@ def malocalisation(request):
             userloc.description=user.first_name + " " + user.last_name
             userloc.userid=user.pk
             userloc.save(using="gadzmap")
-            messages.success(request, "Modification(s) réussie(s)")
+            messages.success(request, "Localisation enregistrée")
             return redirect(index)
         else:
             messages.error(request, "Une erreur est survenue")

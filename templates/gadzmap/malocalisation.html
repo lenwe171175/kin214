@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 {% load static %}
+{% load leaflet_tags %}
 {% block title %}KIN 214 | Où suis-je ?{% endblock %}
 {% block content %}
-{{ form.media }}
+{% leaflet_js plugins="forms" %}
+{% leaflet_css plugins="forms" %}
+
 <div class="ui middle aligned center aligned grid">
 	<div class="eight wide column">
     <form class="ui large fluid form" action ="{% url "malocalisation" %}" method="POST">
 		{% csrf_token %}
       	<div class="ui stacked segment">
 			<div class="ui blue header">Où suis-je ?</div>
+			Place toi sur la carte !
 			{% for field in form %}
 	        	{% if field.errors %}
 				<div class = "error field">
