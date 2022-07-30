@@ -55,7 +55,7 @@ class InscriptionForm(forms.ModelForm):
         domain = data.split('@')[1]
         domain_list = ["gadz.org"]
         if domain not in domain_list:
-            raise forms.ValidationError("Seules les adresses mail Gadz.org sont autorisées")
+            raise forms.ValidationError("Cette adresse mail n'est pas autorisée")
         return data
     
     def __init__(self, *args, **kwargs):
