@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load leaflet_tags %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -48,7 +48,8 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static "images/favicon-16x16.png" %}">
 	<link rel="manifest" href="{% static "manifest.json" %}">
 
-	{{ form.media }}
+	{% leaflet_js plugins="forms" %}
+	{% leaflet_css plugins="forms" %}
 	
 	<style type="text/css">
 		body {
