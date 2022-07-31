@@ -9,7 +9,7 @@
 		{% csrf_token %}
       	<div class="ui segment">
 			<div class="ui blue header">Où suis-je ?</div>
-			Place toi sur la carte !
+			<p>Sur la carte ci-dessous, sélectionne l'icône <i class="map marker alternate icon"></i>et positionne le où tu habites</p>
 			{% for field in form %}
 	        	{% if field.errors %}
 				<div class = "error field">
