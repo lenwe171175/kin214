@@ -165,6 +165,7 @@ CSRF_TRUSTED_ORIGINS = [URL_CSRF]
 LEAFLET_CONFIG = { 
     'DEFAULT_CENTER': (46.377 ,2.307), # Latitude ,  Longitude 
     'DEFAULT_ZOOM': 5,
+    'FORCE_IMAGE_PATH': True,
 }
 
 if not HEROKU:
