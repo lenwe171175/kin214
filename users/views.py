@@ -4,6 +4,7 @@ from django.contrib import messages
 from kin214.settings import LOGIN_URL
 from .forms import InscriptionForm, MonProfilForm
 from .models import Utilisateur
+from gadzmap.models import Position
 
 # Create your views here.
 
@@ -15,7 +16,17 @@ def server_error_view(request):
 
 @login_required
 def index(request):
-    return render(request, "users/index.html")
+    profil_empty=False
+    loc_empty=False
+    all_empty=False
+    user=Utilisateur.objects.get(pk=request.user.pk)
+    if Position.objects.using("gadzmap").filter(userid=request.user.pk).count() != 1:
+        loc_empty=True
+    if not user.entreprise or not user.poste:
+        profil_empty=True
+    if profil_empty and loc_empty:
+        all_empty=True
+    return render(request, "users/index.html", {"profil_empty": profil_empty, "loc_empty":loc_empty})
 
 def inscription(request):
     if request.method == "POST":

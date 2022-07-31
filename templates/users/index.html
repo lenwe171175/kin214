@@ -4,11 +4,27 @@
 {% block content %}
 
 <div class="ui stackable center aligned middle aligned grid">
+    <div class="sixteen wide column">
+        {% if profil_empty or loc_empty %}
+        <div class="ui message">
+            <div class="header">
+            Bienvenue !
+            </div><p>
+            {% if profil_empty and loc_empty %}
+            N'oublie pas de compléter <a href="{% url "monprofil" %}">ton profil</a> et <a href="{% url "malocalisation" %}">ta localisation</a>
+            {% elif loc_empty %}
+            N'oublie pas de compléter <a href="{% url "malocalisation" %}">ta localisation</a>
+            {% elif profil_empty %}   
+            N'oublie pas de compléter <a href="{% url "monprofil" %}">ton profil</a>         
+            {% endif %}
+            </p>
+        </div>
+        {% endif %}
+    </div>
     <div class="eight wide column">
         <a href = "{% url "annuaire" %}">
         <div class="ui segment">
             <div class="ui icon header">
-                
                 <i class="address book blue icon"></i>
                 Annuaire
             </div>
