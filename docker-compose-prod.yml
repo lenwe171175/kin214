@@ -15,7 +15,7 @@ services:
       - postgres
     labels:
       - traefik.enable=true
-      - traefik.http.routers.kin214.rule=Host(`${URL}`)
+      - traefik.http.routers.kin214.rule=Host(`{{ env "URL"}}`)
       - traefik.http.routers.kin214.entrypoints=websecure
     depends_on:
       postgis:
