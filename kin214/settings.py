@@ -38,6 +38,8 @@ ALLOWED_HOSTS = ["*"]
 
 HEROKU = getenv("HEROKU", "False") == "True"
 
+PROD = getenv("PROD", "False") == "True"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -63,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if HEROKU:
+if PROD or HEROKU:
     MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 else:
     MIDDLEWARE.append('django.middleware.security.SecurityMiddleware')
@@ -141,7 +143,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
-if HEROKU:
+if PROD or HEROKU:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -159,7 +161,12 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = getenv("DEFAULT_FROM_EMAIL", "")
 SERVER_EMAIL = getenv("SERVER_EMAIL", "")
 
-URL_CSRF = getenv("URL_CSRF", "")
+HTTPS = getenv("HTTPS", "False") == "True"
+if HTTPS:
+    URL_CSRF = "https://" + getenv("URL", "")
+else:
+    URL_CSRF = "http://" + getenv("URL", "")
+    
 CSRF_TRUSTED_ORIGINS = [URL_CSRF]
 
 LEAFLET_CONFIG = { 
