@@ -49,6 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'health_check',
+    'health_check.db',
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.migrations',
     'users',
     'captcha',
     'django.contrib.gis',
@@ -69,8 +74,6 @@ MIDDLEWARE = [
 if PROD or HEROKU:
     security_middleware_index = MIDDLEWARE.index("django.middleware.security.SecurityMiddleware")
     MIDDLEWARE.insert(security_middleware_index, "whitenoise.middleware.WhiteNoiseMiddleware")
-else:
-    MIDDLEWARE.append('django.middleware.security.SecurityMiddleware')
 
 ROOT_URLCONF = 'kin214.urls'
 
