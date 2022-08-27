@@ -66,7 +66,8 @@ MIDDLEWARE = [
 ]
 
 if PROD or HEROKU:
-    MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
+    security_middleware_index = MIDDLEWARE.index("django.middleware.security.SecurityMiddleware")
+    MIDDLEWARE.insert(security_middleware_index, "whitenoise.middleware.WhiteNoiseMiddleware")
 else:
     MIDDLEWARE.append('django.middleware.security.SecurityMiddleware')
 
